@@ -4,80 +4,102 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>BTS México – Proyectos de Fans 💜</title>
+
+  <!-- META TAGS — así se ve cuando compartes el link -->
+  <meta name="description" content="Todos los fan projects del BTS World Tour ARIRANG en CDMX. Días 7, 9 y 10 de mayo 2026 · Estadio GNP Seguros."/>
+  <meta property="og:title" content="BTS en México — Proyectos de Fans 💜"/>
+  <meta property="og:description" content="Todos los fan projects del BTS World Tour ARIRANG en CDMX. Días 7, 9 y 10 de mayo 2026 · Estadio GNP Seguros."/>
+  <meta property="og:image" content="mapa-estadio.png"/>
+  <meta property="og:type" content="website"/>
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:title" content="BTS en México — Proyectos de Fans 💜"/>
+  <meta name="twitter:description" content="Todos los fan projects del BTS World Tour ARIRANG en CDMX. Días 7, 9 y 10 de mayo 2026."/>
+  <meta name="twitter:image" content="mapa-estadio.png"/>
+
+  <!-- html2canvas para exportar imagen -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
   <style>
     :root { --purple: #6B3FA0; --lavender: #C9A7EB; --soft: #F3EAFF; --dark: #1a1a2e; --muted: #555; }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body { font-family: 'Segoe UI', sans-serif; background: var(--soft); color: #2d2d2d; }
 
-    header {
-      background: linear-gradient(135deg, #1a1a2e 0%, #6B3FA0 100%);
-      color: white; text-align: center; padding: 50px 24px 38px; position: relative;
-    }
-    .lang-toggle { position: absolute; top: 18px; right: 18px; display: flex; gap: 6px; }
-    .lang-toggle button {
-      background: rgba(255,255,255,0.15); border: 1.5px solid rgba(255,255,255,0.4);
-      color: white; padding: 6px 14px; border-radius: 20px; cursor: pointer; font-weight: 700; font-size: 0.85rem; transition: all 0.2s;
-    }
-    .lang-toggle button.active { background: white; color: var(--purple); }
+    /* UPDATE BAR */
+    .update-bar { background: white; border-bottom: 1.5px solid #e8d8ff; text-align: center; padding: 8px 16px; font-size: 0.8rem; color: var(--muted); }
+    .update-bar span { color: var(--purple); font-weight: 700; }
+
+    header { background: linear-gradient(135deg, #1a1a2e 0%, #6B3FA0 100%); color: white; text-align: center; padding: 50px 24px 38px; position: relative; }
     header .icon { font-size: 2.8rem; display: block; margin-bottom: 12px; }
     header h1 { font-size: clamp(1.5rem, 4vw, 2.4rem); font-weight: 900; }
     header p { margin-top: 8px; opacity: 0.82; font-size: 0.97rem; }
 
+    /* SHARE BAR */
+    .share-bar { background: white; border-bottom: 1.5px solid #e8d8ff; display: flex; align-items: center; justify-content: center; gap: 10px; padding: 10px 16px; flex-wrap: wrap; }
+    .share-label { font-size: 0.8rem; color: var(--muted); font-weight: 600; }
+    .share-btn { display: inline-flex; align-items: center; gap: 6px; padding: 7px 14px; border-radius: 20px; font-size: 0.8rem; font-weight: 700; text-decoration: none; border: none; cursor: pointer; transition: opacity 0.2s; }
+    .share-btn:hover { opacity: 0.85; }
+    .share-btn.twitter { background: #000; color: white; }
+    .share-btn.whatsapp { background: #25D366; color: white; }
+    .share-btn.facebook { background: #1877F2; color: white; }
+    .share-btn.export { background: var(--soft); color: var(--purple); border: 1.5px solid var(--lavender); }
+    .share-btn svg { width: 14px; height: 14px; fill: currentColor; flex-shrink: 0; }
+
     .day-nav { display: flex; justify-content: center; gap: 10px; padding: 28px 20px 0; flex-wrap: wrap; }
-    .day-btn {
-      background: white; border: 2px solid var(--lavender); color: var(--purple);
-      padding: 10px 24px; border-radius: 50px; font-weight: 700; font-size: 0.93rem; cursor: pointer; transition: all 0.2s;
-    }
+    .day-btn { background: white; border: 2px solid var(--lavender); color: var(--purple); padding: 10px 24px; border-radius: 50px; font-weight: 700; font-size: 0.93rem; cursor: pointer; transition: all 0.2s; }
     .day-btn.active, .day-btn:hover { background: var(--purple); color: white; border-color: var(--purple); }
 
-    .day-section { display: none; max-width: 820px; margin: 28px auto; padding: 0 20px 60px; }
+    .day-section { display: none; max-width: 820px; margin: 28px auto; padding: 0 20px 40px; }
     .day-section.active { display: block; }
     .day-header { text-align: center; margin-bottom: 24px; }
     .day-header h2 { font-size: 1.4rem; color: var(--purple); font-weight: 800; }
     .date-badge { display: inline-block; background: var(--lavender); color: var(--dark); padding: 4px 14px; border-radius: 20px; font-size: 0.8rem; font-weight: 700; margin-top: 8px; }
 
-    /* CARDS */
+    /* MAPA */
+    .map-section { max-width: 820px; margin: 24px auto 0; padding: 0 20px; }
+    .map-toggle-btn { display: flex; align-items: center; gap: 8px; background: white; border: 1.5px solid var(--lavender); color: var(--purple); padding: 10px 18px; border-radius: 12px; font-weight: 700; font-size: 0.88rem; cursor: pointer; transition: all 0.2s; margin: 0 auto; }
+    .map-toggle-btn:hover { background: var(--soft); }
+    .map-box { display: none; margin-top: 12px; background: white; border-radius: 16px; border: 1.5px solid #e8d8ff; overflow: hidden; box-shadow: 0 2px 14px rgba(107,63,160,0.07); }
+    .map-box.open { display: block; }
+    .map-box img { width: 100%; height: auto; display: block; }
+    .map-legend { padding: 10px 16px; font-size: 0.78rem; color: var(--muted); text-align: center; background: #fdf4ff; }
+
     .cards { display: grid; gap: 20px; }
     .card { background: white; border-radius: 18px; border: 1.5px solid #e8d8ff; box-shadow: 0 2px 14px rgba(107,63,160,0.07); overflow: hidden; transition: box-shadow 0.2s; }
     .card:hover { box-shadow: 0 6px 24px rgba(107,63,160,0.14); }
-
-    .card-header {
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 22px 24px; cursor: pointer; user-select: none;
-    }
-    .card-header-left { display: flex; align-items: center; gap: 14px; }
-    .card-tag { background: var(--soft); color: var(--purple); font-size: 0.7rem; font-weight: 800; padding: 3px 10px; border-radius: 10px; text-transform: uppercase; letter-spacing: 0.5px; white-space: nowrap; }
-    .card-title { font-size: 1.08rem; font-weight: 800; color: var(--dark); }
-    .card-arrow { font-size: 1.1rem; color: var(--purple); transition: transform 0.3s; }
+    .card-header { display: flex; align-items: center; justify-content: space-between; padding: 20px 24px; cursor: pointer; user-select: none; }
+    .card-header-left { display: flex; align-items: center; gap: 12px; }
+    .card-tag { background: var(--soft); color: var(--purple); font-size: 0.7rem; font-weight: 800; padding: 3px 10px; border-radius: 10px; text-transform: uppercase; white-space: nowrap; }
+    .card-title { font-size: 1.05rem; font-weight: 800; color: var(--dark); }
+    .card-arrow { font-size: 1rem; color: var(--purple); transition: transform 0.3s; flex-shrink: 0; }
     .card.open .card-arrow { transform: rotate(180deg); }
-
     .card-body { display: none; padding: 0 24px 24px; border-top: 1px solid #f0e4ff; }
     .card.open .card-body { display: block; }
-
     .card-desc { font-size: 0.92rem; color: var(--muted); line-height: 1.65; margin: 16px 0; }
 
-    /* SECTIONS INSIDE CARD */
-    .section-title { font-size: 0.85rem; font-weight: 800; color: var(--dark); text-transform: uppercase; letter-spacing: 0.5px; margin: 18px 0 10px; }
-
+    .section-title { font-size: 0.82rem; font-weight: 800; color: var(--dark); text-transform: uppercase; letter-spacing: 0.5px; margin: 18px 0 10px; }
     .steps { display: flex; flex-direction: column; gap: 10px; }
     .step { display: flex; gap: 12px; align-items: flex-start; }
     .step-num { min-width: 26px; height: 26px; background: var(--purple); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.78rem; font-weight: 800; flex-shrink: 0; }
     .step-text { font-size: 0.88rem; color: var(--muted); line-height: 1.55; padding-top: 3px; }
 
-    .alert-box { background: #fdf4ff; border: 1.5px solid var(--lavender); border-radius: 10px; padding: 12px 14px; margin: 12px 0; font-size: 0.87rem; color: var(--dark); line-height: 1.6; }
+    .alert-box { background: #fdf4ff; border: 1.5px solid var(--lavender); border-radius: 10px; padding: 12px 14px; margin: 10px 0; font-size: 0.86rem; color: var(--dark); line-height: 1.6; }
     .alert-box strong { color: var(--purple); }
 
-    .faq-list { display: flex; flex-direction: column; gap: 12px; }
+    .faq-list { display: flex; flex-direction: column; gap: 10px; }
     .faq-item { background: #fdf4ff; border-radius: 10px; padding: 12px 14px; }
-    .faq-q { font-weight: 800; font-size: 0.87rem; color: var(--dark); margin-bottom: 5px; }
-    .faq-a { font-size: 0.85rem; color: var(--muted); line-height: 1.58; }
+    .faq-q { font-weight: 800; font-size: 0.86rem; color: var(--dark); margin-bottom: 5px; }
+    .faq-a { font-size: 0.84rem; color: var(--muted); line-height: 1.58; }
 
     .color-swatches { display: flex; gap: 10px; margin: 8px 0; flex-wrap: wrap; }
-    .swatch { display: flex; align-items: center; gap: 7px; font-size: 0.83rem; color: var(--muted); }
+    .swatch { display: flex; align-items: center; gap: 7px; font-size: 0.82rem; color: var(--muted); }
     .swatch-dot { width: 22px; height: 22px; border-radius: 50%; border: 1.5px solid #ddd; }
 
-    .org-list { display: flex; gap: 8px; flex-wrap: wrap; margin: 6px 0; }
-    .org-badge { background: var(--soft); border: 1.5px solid var(--lavender); color: var(--purple); padding: 5px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: 700; }
+    .org-list { display: flex; gap: 10px; flex-wrap: wrap; margin: 8px 0; }
+    a.org-badge { display: flex; align-items: center; gap: 8px; background: var(--soft); border: 1.5px solid var(--lavender); color: var(--purple); padding: 6px 12px 6px 6px; border-radius: 30px; font-size: 0.8rem; font-weight: 700; text-decoration: none; transition: background 0.2s; }
+    a.org-badge:hover { background: var(--lavender); }
+    a.org-badge img { width: 26px; height: 26px; border-radius: 50%; object-fit: cover; }
+
+    .soon-badge { display: inline-block; background: #f0e4ff; color: var(--purple); font-size: 0.72rem; font-weight: 700; padding: 2px 8px; border-radius: 10px; margin-left: 8px; vertical-align: middle; }
 
     .btn-row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 18px; }
     .btn { display: inline-block; background: var(--purple); color: white; padding: 9px 18px; border-radius: 9px; font-size: 0.84rem; font-weight: 700; text-decoration: none; transition: background 0.2s; }
@@ -87,155 +109,330 @@
     .btn.green { background: #25D366; }
     .btn.green:hover { background: #1da851; }
 
-    /* COMING SOON */
-    .coming-soon { text-align: center; padding: 60px 20px; color: #aaa; }
-    .coming-soon .icon { font-size: 2.8rem; margin-bottom: 12px; }
+    /* DISCLAIMER */
+    .disclaimer { max-width: 820px; margin: 0 auto 40px; padding: 0 20px; }
+    .disclaimer-box { background: white; border: 1.5px solid #e8d8ff; border-radius: 14px; padding: 20px 24px; font-size: 0.83rem; color: #777; line-height: 1.7; }
+    .disclaimer-box strong { color: var(--dark); }
+    .disclaimer-box a { color: var(--purple); font-weight: 700; text-decoration: none; }
+    .disclaimer-box a:hover { text-decoration: underline; }
 
     footer { text-align: center; padding: 22px; font-size: 0.84rem; color: #999; border-top: 1px solid #e8d8ff; }
+
+    /* EXPORT OVERLAY */
+    .export-toast { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%); background: var(--dark); color: white; padding: 12px 24px; border-radius: 30px; font-size: 0.85rem; font-weight: 600; display: none; z-index: 999; }
+    .export-toast.show { display: block; }
   </style>
 </head>
 <body>
 
+<div class="update-bar">
+  🔄 Última actualización: <span>4 de mayo, 2026</span> · Esta página se actualiza conforme se anuncie nueva información
+</div>
+
 <header>
-  <div class="lang-toggle">
-    <button class="active" onclick="setLang('es')">ES</button>
-    <button onclick="setLang('en')">EN</button>
-  </div>
   <span class="icon">💜</span>
-  <h1 class="t" data-es="BTS en México — Proyectos de Fans" data-en="BTS in Mexico — Fan Projects">BTS en México — Proyectos de Fans</h1>
-  <p class="t" data-es="Selecciona tu día y descubre los proyectos" data-en="Select your day and discover the fan projects">Selecciona tu día y descubre los proyectos</p>
+  <h1>BTS en México — Proyectos de Fans</h1>
+  <p>BTS World Tour 'ARIRANG' · Estadio GNP Seguros · CDMX</p>
 </header>
+
+<!-- BARRA DE COMPARTIR -->
+<div class="share-bar">
+  <span class="share-label">Compartir:</span>
+
+  <a class="share-btn twitter" href="https://twitter.com/intent/tweet?text=💜%20Fan%20Projects%20BTS%20ARIRANG%20CDMX%20—%20Días%207%2C%209%20y%2010%20de%20mayo.%20Toda%20la%20info%20aquí%3A&url=https://btsmxprojects.vercel.app/" target="_blank">
+    <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.253 5.622 5.911-5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+    X / Twitter
+  </a>
+
+  <a class="share-btn whatsapp" href="https://wa.me/?text=💜%20Fan%20Projects%20BTS%20ARIRANG%20CDMX%20—%20Días%207%2C%209%20y%2010%20de%20mayo.%20Toda%20la%20info%3A%20https://btsmxprojects.vercel.app/" target="_blank">
+    <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    WhatsApp
+  </a>
+
+  <a class="share-btn facebook" href="https://www.facebook.com/sharer/sharer.php?u=https://btsmxprojects.vercel.app/" target="_blank">
+    <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+    Facebook
+  </a>
+
+  <button class="share-btn export" onclick="exportarImagen()">
+    <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14v-4H8l4-4 4 4h-3v4h-2z" fill="var(--purple)"/></svg>
+    Guardar como imagen
+  </button>
+</div>
 
 <div class="day-nav">
   <button class="day-btn active" onclick="showDay(1)">💜 Día 1 — 7 Mayo</button>
-  <button class="day-btn" onclick="showDay(2)"><span class="t" data-es="Día 2 — Próximamente" data-en="Day 2 — Coming Soon">Día 2 — Próximamente</span></button>
-  <button class="day-btn" onclick="showDay(3)"><span class="t" data-es="Día 3 — Próximamente" data-en="Day 3 — Coming Soon">Día 3 — Próximamente</span></button>
+  <button class="day-btn" onclick="showDay(2)">Día 2 — 9 Mayo</button>
+  <button class="day-btn" onclick="showDay(3)">Día 3 — 10 Mayo</button>
 </div>
 
-<!-- DÍA 1 -->
+<!-- MAPA -->
+<div class="map-section">
+  <button class="map-toggle-btn" onclick="toggleMap()">🗺️ Ver mapa del estadio ▼</button>
+  <div class="map-box" id="mapBox">
+    <img src="mapa-estadio.png" alt="Mapa Estadio GNP Seguros — BTS ARIRANG México 2026"/>
+    <div class="map-legend">Mapa oficial de secciones · Estadio GNP Seguros · Fuente: Ticketmaster</div>
+  </div>
+</div>
+
+<!-- ===== DÍA 1 ===== -->
 <div class="day-section active" id="day1">
   <div class="day-header">
-    <h2 class="t" data-es="Proyectos — Día 1" data-en="Day 1 Projects">Proyectos — Día 1</h2>
+    <h2>Proyectos — Día 1</h2>
     <span class="date-badge">📅 7 de Mayo, 2026</span>
   </div>
   <div class="cards">
 
-    <div class="card" id="card1">
-      <div class="card-header" onclick="toggleCard('card1')">
-        <div class="card-header-left">
-          <span class="card-tag">Fan Project</span>
-          <span class="card-title">💜 Purple Hearts</span>
-        </div>
+    <div class="card" id="card-ph">
+      <div class="card-header" onclick="toggleCard('card-ph')">
+        <div class="card-header-left"><span class="card-tag">Fan Project</span><span class="card-title">💜 Purple Hearts</span></div>
         <span class="card-arrow">▼</span>
       </div>
       <div class="card-body">
-
-        <p class="card-desc t"
-          data-es="Durante Take Two, llenemos el estadio de corazones morados con la frase 'I STAYED' para recordarle a BTS que nos quedamos."
-          data-en="During Take Two, let's fill the stadium with purple hearts and the phrase 'I STAYED' to remind BTS that we stayed.">
-          Durante Take Two, llenemos el estadio de corazones morados con la frase "I STAYED" para recordarle a BTS que nos quedamos.
-        </p>
-
-        <p class="section-title t" data-es="¿Qué hay que hacer?" data-en="What to do?">¿Qué hay que hacer?</p>
+        <p class="card-desc">Durante Take Two, llenemos el estadio de corazones morados con la frase "I STAYED" para recordarle a BTS que nos quedamos.</p>
+        <p class="section-title">¿Qué hay que hacer?</p>
         <div class="steps">
-          <div class="step">
-            <span class="step-num">1</span>
-            <span class="step-text t" data-es="Cuando empiece 'Take Two', levanta tu corazón a la altura de tu Army Bomb durante toda la canción." data-en="When 'Take Two' starts, raise your heart to the level of your Army Bomb for the entire song.">Cuando empiece "Take Two", levanta tu corazón a la altura de tu Army Bomb durante toda la canción.</span>
-          </div>
+          <div class="step"><span class="step-num">1</span><span class="step-text">Cuando empiece "Take Two", levanta tu corazón a la altura de tu Army Bomb durante toda la canción.</span></div>
         </div>
-
-        <div class="alert-box">
-          <strong>⚠️ IMPORTANTE:</strong> Mantengan el corazón en alto desde el inicio hasta el final de la canción para crear un momento especial y que el efecto se vea en todo el estadio.
-        </div>
-        <div class="alert-box">
-          <strong>💜 Sobre el Army Bomb:</strong> El Army Bomb no se va a apagar en ningún momento. Pueden sostener el corazón junto a su Army Bomb, y con su otra mano pueden usar su celular si lo desean, pero el Army Bomb siempre debe permanecer encendido.
-        </div>
-
-        <p class="section-title t" data-es="Preguntas Frecuentes" data-en="FAQ">Preguntas Frecuentes</p>
+        <div class="alert-box"><strong>⚠️ IMPORTANTE:</strong> Mantengan el corazón en alto desde el inicio hasta el final de la canción para que el efecto se vea en todo el estadio.</div>
+        <div class="alert-box"><strong>💜 Sobre el Army Bomb:</strong> NO se apaga en ningún momento. Puedes sostener el corazón junto a tu Army Bomb y usar el celular con la otra mano.</div>
+        <p class="section-title">Preguntas Frecuentes</p>
         <div class="faq-list">
-          <div class="faq-item">
-            <p class="faq-q t" data-es="¿Qué pasa si 'Take Two' no está en el setlist?" data-en="What if 'Take Two' is not in the setlist?">¿Qué pasa si "Take Two" no está en el setlist?</p>
-            <p class="faq-a t" data-es="En caso de que 'Take Two' no esté en el setlist, se tiene contemplado hacerlo durante 'Magic Shop'. Si ninguna canción está dentro, se modificará y avisará inmediatamente." data-en="If 'Take Two' is not in the setlist, the project will take place during 'Magic Shop'. If neither song is included, it will be modified and announced immediately.">En caso de que "Take Two" no esté en el setlist, se tiene contemplado hacerlo durante "Magic Shop". Si ninguna canción está dentro, se modificará y avisará inmediatamente.</p>
-          </div>
-          <div class="faq-item">
-            <p class="faq-q t" data-es="¿Llevará alguna frase?" data-en="Will it include a phrase?">¿Llevará alguna frase?</p>
-            <p class="faq-a">
-              🎵 <strong>Take Two:</strong> "I Stayed"<br>
-              🎵 <strong>Magic Shop:</strong> "I'll Show You"
-            </p>
-          </div>
-          <div class="faq-item">
-            <p class="faq-q t" data-es="¿Dónde entregarán el material?" data-en="Where will materials be handed out?">¿Dónde entregarán el material?</p>
-            <p class="faq-a t" data-es="El staff estará en Puerta 6 y Puerta 15. También se repartirá dentro de las zonas para que más personas puedan participar." data-en="Staff will be at Gate 6 and Gate 15. Materials will also be distributed inside the venue zones.">El staff estará en <strong>Puerta 6</strong> y <strong>Puerta 15</strong>. También se repartirá dentro de las zonas para que más personas puedan participar.</p>
-          </div>
-          <div class="faq-item">
-            <p class="faq-q t" data-es="¿Nosotros haríamos los corazones?" data-en="Do we need to make the hearts ourselves?">¿Nosotros haríamos los corazones?</p>
-            <p class="faq-a t" data-es="El staff se encargará de realizar la mayor cantidad de corazones. Sin embargo, abrimos convocatoria para ARMY que guste apoyar haciendo corazones adicionales (sin frase). ¡Ayudarás a que el proyecto se vea más grande!" data-en="Staff will handle making most of the hearts. However, we welcome ARMY who want to help make additional hearts (without the phrase). You'll help make the project even bigger!">El staff se encargará de realizar la mayor cantidad de corazones. Sin embargo, abrimos convocatoria para ARMY que guste apoyar haciendo corazones adicionales (sin frase). ¡Ayudarás a que el proyecto se vea más grande!</p>
-          </div>
-          <div class="faq-item">
-            <p class="faq-q t" data-es="¿Cómo me entero de más detalles?" data-en="How do I get more details?">¿Cómo me entero de más detalles?</p>
-            <p class="faq-a t" data-es="Sigue a las fanbases organizadoras en X (Twitter) para actualizaciones en tiempo real." data-en="Follow the organizing fanbases on X (Twitter) for real-time updates.">Sigue a las fanbases organizadoras en X (Twitter) para actualizaciones en tiempo real.</p>
-          </div>
+          <div class="faq-item"><p class="faq-q">¿Qué pasa si "Take Two" no está en el setlist?</p><p class="faq-a">Se hará durante "Magic Shop". Si ninguna canción está disponible, se modificará y avisará inmediatamente.</p></div>
+          <div class="faq-item"><p class="faq-q">¿Llevará alguna frase?</p><p class="faq-a">🎵 <strong>Take Two:</strong> "I Stayed" &nbsp;|&nbsp; 🎵 <strong>Magic Shop:</strong> "I'll Show You"</p></div>
+          <div class="faq-item"><p class="faq-q">¿Dónde entregan el material?</p><p class="faq-a">El staff estará en <strong>Puerta 6</strong> y <strong>Puerta 15</strong>. También se repartirá dentro de las zonas.</p></div>
+          <div class="faq-item"><p class="faq-q">¿Nosotros hacemos los corazones?</p><p class="faq-a">El staff prepara la mayoría. También abrimos convocatoria para ARMY que quiera apoyar haciendo corazones adicionales (sin frase).</p></div>
+          <div class="faq-item"><p class="faq-q">¿Cómo me entero de más detalles?</p><p class="faq-a">Sigue a las fanbases organizadoras en X (Twitter) para actualizaciones en tiempo real.</p></div>
         </div>
-
-        <p class="section-title t" data-es="Materiales — Haz tu propio corazón" data-en="Materials — Make your own heart">Materiales — Haz tu propio corazón</p>
+        <p class="section-title">Haz tu propio corazón — Colores</p>
         <div class="color-swatches">
           <div class="swatch"><div class="swatch-dot" style="background:#6A0DAD;"></div>#6A0DAD</div>
           <div class="swatch"><div class="swatch-dot" style="background:#772FAD;"></div>#772FAD</div>
           <div class="swatch"><div class="swatch-dot" style="background:#BA81E2;"></div>#BA81E2</div>
         </div>
-        <p style="font-size:0.84rem;color:var(--muted);margin:8px 0 4px;">
-          📐 <strong class="t" data-es="Zona Platino:" data-en="Platinum Zone:">Zona Platino:</strong> <span class="t" data-es="corazón pequeño (están más cerca del escenario)" data-en="small heart (closer to the stage)">corazón pequeño (están más cerca del escenario)</span><br>
-          📐 <strong class="t" data-es="Otras zonas:" data-en="Other zones:">Otras zonas:</strong> <span class="t" data-es="corazón grande. Cada ARMY decide qué tamaño usar." data-en="large heart. Each ARMY can decide which size to use.">corazón grande. Cada ARMY decide qué tamaño usar.</span>
-        </p>
-
-        <p class="section-title t" data-es="Organizadoras" data-en="Organizers">Organizadoras</p>
+        <p style="font-size:0.84rem;color:var(--muted);margin:8px 0 4px;">📐 <strong>Zona Platino:</strong> corazón pequeño &nbsp;|&nbsp; <strong>Otras zonas:</strong> corazón grande</p>
+        <p class="section-title">Organizadoras</p>
         <div class="org-list">
-          <span class="org-badge">@btsmx.eternal</span>
-          <span class="org-badge">@cinnamoon_bee</span>
-          <span class="org-badge">@axomys</span>
+          <a href="https://x.com/axomysmx" target="_blank" class="org-badge"><img src="https://unavatar.io/twitter/axomysmx" alt="axomysmx" onerror="this.src='https://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png'"/>@axomysmx</a>
+          <a href="https://x.com/www_bangtan_613" target="_blank" class="org-badge"><img src="https://unavatar.io/twitter/www_bangtan_613" alt="www_bangtan_613" onerror="this.src='https://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png'"/>@www_bangtan_613</a>
+          <a href="https://www.instagram.com/_cinnamoonbee" target="_blank" class="org-badge"><img src="https://unavatar.io/instagram/_cinnamoonbee" alt="cinnamoonbee" onerror="this.src='https://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png'"/>@_cinnamoonbee 📸</a>
         </div>
-
         <div class="btn-row">
           <a href="https://x.com/www_bangtan_613/status/2029242506844532839?s=20" target="_blank" class="btn">Ver proyecto en X 🐦</a>
-          <a href="https://www.canva.com/design/DAHDH8piK6k/jQRHbJb7aPI1so2Ezmm5RA/edit" target="_blank" class="btn outline t" data-es="Descargar plantilla corazón" data-en="Download heart template">Descargar plantilla corazón 💜</a>
+          <a href="https://www.canva.com/design/DAHDH8piK6k/jQRHbJb7aPI1so2Ezmm5RA/edit" target="_blank" class="btn outline">Descargar plantilla 💜</a>
           <a href="https://chat.whatsapp.com/KBdkl9BdZCV3Kv3SqgNk5R?mode=gi_t" target="_blank" class="btn green">WhatsApp 💬</a>
         </div>
+      </div>
+    </div>
 
+    <div class="card" id="card-apo">
+      <div class="card-header" onclick="toggleCard('card-apo')">
+        <div class="card-header-left"><span class="card-tag">Proyecto de Luces</span><span class="card-title">✨ Apobangpo Project</span></div>
+        <span class="card-arrow">▼</span>
+      </div>
+      <div class="card-body">
+        <p class="card-desc">Crear un momento visual especial formando el mensaje "WELCOME BACK" con las linternas del celular desde las gradas.</p>
+        <p class="section-title">¿Qué hay que hacer?</p>
+        <div class="steps">
+          <div class="step"><span class="step-num">1</span><span class="step-text">El material ya fue colocado en tu asiento por ARMY del staff. ¡Búscalo!</span></div>
+          <div class="step"><span class="step-num">2</span><span class="step-text">Cuando empiece la canción indicada, coloca TU papelito asignado sobre la linterna de tu celular.</span></div>
+          <div class="step"><span class="step-num">3</span><span class="step-text">Enciéndela y mantenla así durante toda la canción.</span></div>
+        </div>
+        <div class="alert-box"><strong>❌ NO intercambies tu papelito con nadie.</strong> Cada color está asignado asiento por asiento para formar correctamente las frases.</div>
+        <div class="alert-box"><strong>💜 Sobre el Army Bomb:</strong> NO se apaga en ningún momento. Esto NO es un Black Ocean. Durante la canción puedes bajar el Army Bomb a la altura de tu cadera, <strong>SIN apagarlo</strong>.</div>
+        <p class="section-title">Organizadoras por zona</p>
+        <div class="org-list">
+          <a href="https://x.com/apobangpomx" target="_blank" class="org-badge"><img src="https://unavatar.io/twitter/apobangpomx" alt="apobangpomx" onerror="this.src='https://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png'"/>@apobangpomx — Gradas</a>
+          <a href="https://x.com/tapitasdejinnie" target="_blank" class="org-badge"><img src="https://unavatar.io/twitter/tapitasdejinnie" alt="tapitasdejinnie" onerror="this.src='https://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png'"/>@tapitasdejinnie — Platino</a>
+          <a href="https://x.com/tobatobang" target="_blank" class="org-badge"><img src="https://unavatar.io/twitter/tobatobang" alt="tobatobang" onerror="this.src='https://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png'"/>@tobatobang — Zona Morada</a>
+        </div>
+        <div class="btn-row">
+          <a href="https://x.com/apobangpomx/status/2029194220020412674?s=46" target="_blank" class="btn">Ver proyecto en X 🐦</a>
+          <a href="https://apobangpoproyect7.my.canva.site/" target="_blank" class="btn outline">Más información 🌐</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" id="card-banner1">
+      <div class="card-header" onclick="toggleCard('card-banner1')">
+        <div class="card-header-left"><span class="card-tag">Banners</span><span class="card-title">🪧 Banner Project <span class="soon-badge">Próximamente</span></span></div>
+        <span class="card-arrow">▼</span>
+      </div>
+      <div class="card-body">
+        <p class="card-desc">Los detalles de este proyecto se anunciarán muy pronto. Sigue a la fanbase organizadora para no perderte ninguna actualización.</p>
+        <p class="section-title">Organizadora</p>
+        <div class="org-list">
+          <a href="https://x.com/btsmexico_" target="_blank" class="org-badge"><img src="https://unavatar.io/twitter/btsmexico_" alt="btsmexico_" onerror="this.src='https://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png'"/>@btsmexico_</a>
+        </div>
+        <div class="btn-row">
+          <a href="https://x.com/btsmexico_/status/2029376553352560820?s=46" target="_blank" class="btn">Ver anuncio en X 🐦</a>
+        </div>
       </div>
     </div>
 
   </div>
 </div>
 
-<!-- DÍA 2 -->
+<!-- ===== DÍA 2 ===== -->
 <div class="day-section" id="day2">
-  <div class="coming-soon">
-    <div class="icon">🔜</div>
-    <p class="t" data-es="Los proyectos del Día 2 se anunciarán pronto." data-en="Day 2 projects coming soon.">Los proyectos del Día 2 se anunciarán pronto.</p>
+  <div class="day-header">
+    <h2>Proyectos — Día 2</h2>
+    <span class="date-badge">📅 9 de Mayo, 2026</span>
+  </div>
+  <div class="cards">
+
+    <div class="card" id="card-fanchant">
+      <div class="card-header" onclick="toggleCard('card-fanchant')">
+        <div class="card-header-left"><span class="card-tag">Fanchant</span><span class="card-title">🎤 Fanchant <span class="soon-badge">Próximamente</span></span></div>
+        <span class="card-arrow">▼</span>
+      </div>
+      <div class="card-body">
+        <p class="card-desc">Los detalles de este proyecto se anunciarán muy pronto. ¡Pendiente!</p>
+        <p class="section-title">Organizadoras</p>
+        <div class="org-list">
+          <a href="https://x.com/Bangtan_MXCO" target="_blank" class="org-badge"><img src="https://unavatar.io/twitter/Bangtan_MXCO" alt="Bangtan_MXCO" onerror="this.src='https://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png'"/>@Bangtan_MXCO</a>
+          <a href="https://x.com/dream7stars" target="_blank" class="org-badge"><img src="https://unavatar.io/twitter/dream7stars" alt="dream7stars" onerror="this.src='https://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png'"/>@dream7stars</a>
+          <a href="https://x.com/mxcharts" target="_blank" class="org-badge"><img src="https://unavatar.io/twitter/mxcharts" alt="mxcharts" onerror="this.src='https://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png'"/>@mxcharts</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" id="card-wave">
+      <div class="card-header" onclick="toggleCard('card-wave')">
+        <div class="card-header-left"><span class="card-tag">Proyecto de Luces</span><span class="card-title">🇲🇽 Light it Up: The Real Mexican Wave</span></div>
+        <span class="card-arrow">▼</span>
+      </div>
+      <div class="card-body">
+        <p class="card-desc">¡Iluminemos el Estadio GNP Seguros con los colores de la bandera mexicana y hagamos la mejor ola mexicana!</p>
+        <p class="section-title">¿Qué hay que hacer?</p>
+        <div class="steps">
+          <div class="step"><span class="step-num">1</span><span class="step-text">Se te entregará un sticker verde o rojo según tu sección antes del evento. La sección blanca no necesita sticker.</span></div>
+          <div class="step"><span class="step-num">2</span><span class="step-text">Pega el sticker sobre la linterna de tu celular (si estás en sección verde o roja).</span></div>
+          <div class="step"><span class="step-num">3</span><span class="step-text">Enciende la linterna (no el flash) en el momento indicado y haz la ola 🇲🇽</span></div>
+        </div>
+        <div class="alert-box"><strong>💡 Recuerda:</strong> El momento exacto se confirmará más adelante. Fuera de ese momento, usa tu lightstick y mantén la linterna apagada.</div>
+        <p class="section-title">Organizadoras</p>
+        <div class="org-list">
+          <a href="https://x.com/Bangtan_MXCO" target="_blank" class="org-badge"><img src="https://unavatar.io/twitter/Bangtan_MXCO" alt="Bangtan_MXCO" onerror="this.src='https://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png'"/>@Bangtan_MXCO</a>
+          <a href="https://x.com/dream7stars" target="_blank" class="org-badge"><img src="https://unavatar.io/twitter/dream7stars" alt="dream7stars" onerror="this.src='https://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png'"/>@dream7stars</a>
+          <a href="https://x.com/mxcharts" target="_blank" class="org-badge"><img src="https://unavatar.io/twitter/mxcharts" alt="mxcharts" onerror="this.src='https://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png'"/>@mxcharts</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" id="card-banner2">
+      <div class="card-header" onclick="toggleCard('card-banner2')">
+        <div class="card-header-left"><span class="card-tag">Banners</span><span class="card-title">🪧 Banner Project <span class="soon-badge">Próximamente</span></span></div>
+        <span class="card-arrow">▼</span>
+      </div>
+      <div class="card-body">
+        <p class="card-desc">Más detalles próximamente. Sigue a las organizadoras para no perderte nada.</p>
+        <p class="section-title">Organizadoras</p>
+        <div class="org-list">
+          <a href="https://x.com/Bangtan_MXCO" target="_blank" class="org-badge"><img src="https://unavatar.io/twitter/Bangtan_MXCO" alt="Bangtan_MXCO" onerror="this.src='https://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png'"/>@Bangtan_MXCO</a>
+          <a href="https://x.com/dream7stars" target="_blank" class="org-badge"><img src="https://unavatar.io/twitter/dream7stars" alt="dream7stars" onerror="this.src='https://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png'"/>@dream7stars</a>
+          <a href="https://x.com/mxcharts" target="_blank" class="org-badge"><img src="https://unavatar.io/twitter/mxcharts" alt="mxcharts" onerror="this.src='https://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png'"/>@mxcharts</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" id="card-2times">
+      <div class="card-header" onclick="toggleCard('card-2times')">
+        <div class="card-header-left"><span class="card-tag">Dress Code</span><span class="card-title">👕 Two Times for the Past</span></div>
+        <span class="card-arrow">▼</span>
+      </div>
+      <div class="card-body">
+        <p class="card-desc">El día 9 de Mayo trabajaremos con la temática "Two Times for the Past", haciendo referencia a la era debut de BTS.</p>
+        <div class="alert-box"><strong>👕 ¿Cómo participar?</strong> Lleva un vestuario similar o inspirado en el famoso jersey de debut del grupo. Celebramos su pasado mientras somos parte de su presente.</div>
+        <p class="section-title">Organizadoras</p>
+        <div class="org-list">
+          <a href="https://x.com/Bangtan_MXCO" target="_blank" class="org-badge"><img src="https://unavatar.io/twitter/Bangtan_MXCO" alt="Bangtan_MXCO" onerror="this.src='https://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png'"/>@Bangtan_MXCO</a>
+          <a href="https://x.com/dream7stars" target="_blank" class="org-badge"><img src="https://unavatar.io/twitter/dream7stars" alt="dream7stars" onerror="this.src='https://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png'"/>@dream7stars</a>
+          <a href="https://x.com/mxcharts" target="_blank" class="org-badge"><img src="https://unavatar.io/twitter/mxcharts" alt="mxcharts" onerror="this.src='https://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png'"/>@mxcharts</a>
+        </div>
+      </div>
+    </div>
+
   </div>
 </div>
 
-<!-- DÍA 3 -->
+<!-- ===== DÍA 3 ===== -->
 <div class="day-section" id="day3">
-  <div class="coming-soon">
-    <div class="icon">🔜</div>
-    <p class="t" data-es="Los proyectos del Día 3 se anunciarán pronto." data-en="Day 3 projects coming soon.">Los proyectos del Día 3 se anunciarán pronto.</p>
+  <div class="day-header">
+    <h2>Proyectos — Día 3</h2>
+    <span class="date-badge">📅 10 de Mayo, 2026</span>
+  </div>
+  <div class="cards">
+
+    <div class="card" id="card-origins">
+      <div class="card-header" onclick="toggleCard('card-origins')">
+        <div class="card-header-left"><span class="card-tag">Proyecto de Luces</span><span class="card-title">✨ Origins to Eternity</span></div>
+        <span class="card-arrow">▼</span>
+      </div>
+      <div class="card-body">
+        <p class="card-desc">Enciende el papelito en el flash de tu celular o tu varita LED durante la canción que se anunciará más adelante.</p>
+        <div class="alert-box"><strong>📢 Momento exacto:</strong> Se confirmará después del primer concierto del tour.</div>
+        <p class="section-title">Organizadoras</p>
+        <div class="org-list">
+          <a href="https://linktr.ee/btsarmymexico" target="_blank" class="org-badge"><img src="https://unavatar.io/twitter/LasGalactinas" alt="BTS Army México" onerror="this.src='https://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png'"/>BTS Army México 🔗</a>
+        </div>
+        <div class="btn-row">
+          <a href="https://x.com/LasGalactinas/status/2029773850754396241" target="_blank" class="btn">Ver anuncio en X 🐦</a>
+          <a href="https://linktr.ee/btsarmymexico" target="_blank" class="btn outline">Fanbases participantes 🔗</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" id="card-balloon">
+      <div class="card-header" onclick="toggleCard('card-balloon')">
+        <div class="card-header-left"><span class="card-tag">Fan Project</span><span class="card-title">🎈 Bora Balloonheart Dance</span></div>
+        <span class="card-arrow">▼</span>
+      </div>
+      <div class="card-body">
+        <p class="card-desc">Levanta tu globo morado o corazón de foami durante la canción que se anunciará más adelante.</p>
+        <div class="alert-box"><strong>⚠️ Importante:</strong> NO soltar los globos.</div>
+        <div class="alert-box"><strong>📢 Momento exacto:</strong> Se confirmará después del primer concierto del tour.</div>
+        <p class="section-title">Organizadoras</p>
+        <div class="org-list">
+          <a href="https://linktr.ee/btsarmymexico" target="_blank" class="org-badge"><img src="https://unavatar.io/twitter/LasGalactinas" alt="BTS Army México" onerror="this.src='https://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png'"/>BTS Army México 🔗</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" id="card-banner3">
+      <div class="card-header" onclick="toggleCard('card-banner3')">
+        <div class="card-header-left"><span class="card-tag">Banners</span><span class="card-title">🪧 Banner Project — 50,000 banners</span></div>
+        <span class="card-arrow">▼</span>
+      </div>
+      <div class="card-body">
+        <p class="card-desc">Se distribuirán 50,000 banners. Las indicaciones estarán al reverso del banner. La entrega se anunciará más adelante.</p>
+        <div class="alert-box"><strong>📢 Momento exacto:</strong> Se confirmará después del primer concierto del tour.</div>
+        <p class="section-title">Organizadoras</p>
+        <div class="org-list">
+          <a href="https://linktr.ee/btsarmymexico" target="_blank" class="org-badge"><img src="https://unavatar.io/twitter/LasGalactinas" alt="BTS Army México" onerror="this.src='https://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png'"/>BTS Army México 🔗</a>
+        </div>
+      </div>
+    </div>
+
   </div>
 </div>
 
-<footer>Hecho con 💜 por y para ARMY México</footer>
+<!-- DISCLAIMER -->
+<div class="disclaimer">
+  <div class="disclaimer-box">
+    <strong>Aviso importante</strong><br><br>
+    Este sitio es un recurso informativo independiente creado por y para la comunidad ARMY México. Su único propósito es centralizar y difundir información sobre los fan projects del BTS World Tour 'ARIRANG' en la Ciudad de México.<br><br>
+    Todo el contenido aquí presentado ha sido recopilado de fuentes públicas — publicaciones oficiales de las fanbases organizadoras en redes sociales — y se comparte con fines exclusivamente informativos y de apoyo a la comunidad.<br><br>
+    Este sitio no tiene afiliación oficial con BTS, HYBE, BigHit Music ni con ninguna de las fanbases mencionadas. No se recauda ningún tipo de donación, pago o beneficio económico a través de esta plataforma.<br><br>
+    Si eres organizadora de alguno de estos proyectos y necesitas agregar, corregir o eliminar información, por favor contáctame directamente en X: <a href="https://x.com/primeradamar" target="_blank">@primeradamar</a>. Con gusto realizo las modificaciones necesarias a la brevedad.
+  </div>
+</div>
+
+<footer>Hecho con 💜 por y para ARMY México &nbsp;·&nbsp; <a href="https://x.com/primeradamar" target="_blank" style="color:var(--purple);font-weight:700;text-decoration:none;">@primeradamar</a></footer>
+
+<div class="export-toast" id="exportToast">⏳ Generando imagen...</div>
 
 <script>
-  function setLang(lang) {
-    document.querySelectorAll('.t').forEach(el => {
-      const val = el.getAttribute('data-' + lang);
-      if (val) el.textContent = val;
-    });
-    document.querySelectorAll('.lang-toggle button').forEach((btn, i) => {
-      btn.classList.toggle('active', (i === 0 && lang === 'es') || (i === 1 && lang === 'en'));
-    });
-  }
   function showDay(n) {
     document.querySelectorAll('.day-section').forEach(s => s.classList.remove('active'));
     document.querySelectorAll('.day-btn').forEach(b => b.classList.remove('active'));
@@ -244,6 +441,30 @@
   }
   function toggleCard(id) {
     document.getElementById(id).classList.toggle('open');
+  }
+  function toggleMap() {
+    const box = document.getElementById('mapBox');
+    box.classList.toggle('open');
+    document.querySelector('.map-toggle-btn').textContent =
+      box.classList.contains('open') ? '🗺️ Ocultar mapa ▲' : '🗺️ Ver mapa del estadio ▼';
+  }
+  function exportarImagen() {
+    const toast = document.getElementById('exportToast');
+    toast.classList.add('show');
+    toast.textContent = '⏳ Generando imagen...';
+    const seccionActiva = document.querySelector('.day-section.active');
+    html2canvas(seccionActiva, {
+      backgroundColor: '#F3EAFF',
+      scale: 2,
+      useCORS: true
+    }).then(canvas => {
+      const link = document.createElement('a');
+      link.download = 'fanprojects-bts-mexico.png';
+      link.href = canvas.toDataURL('image/png');
+      link.click();
+      toast.textContent = '✅ ¡Imagen guardada!';
+      setTimeout(() => toast.classList.remove('show'), 3000);
+    });
   }
 </script>
 </body>
