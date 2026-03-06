@@ -3,91 +3,95 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>BTS México – Proyectos de Fans</title>
+  <title>BTS México – Proyectos de Fans 💜</title>
   <style>
-    :root { --purple: #6B3FA0; --lavender: #C9A7EB; --soft: #F3EAFF; --dark: #1a1a2e; }
+    :root { --purple: #6B3FA0; --lavender: #C9A7EB; --soft: #F3EAFF; --dark: #1a1a2e; --muted: #555; }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body { font-family: 'Segoe UI', sans-serif; background: var(--soft); color: #2d2d2d; }
 
     header {
       background: linear-gradient(135deg, #1a1a2e 0%, #6B3FA0 100%);
-      color: white; text-align: center; padding: 50px 24px 40px; position: relative;
+      color: white; text-align: center; padding: 50px 24px 38px; position: relative;
     }
-    .emoji-big { font-size: 3rem; display: block; margin-bottom: 12px; }
-    header h1 { font-size: clamp(1.6rem, 4vw, 2.6rem); font-weight: 900; }
-    header p { margin-top: 10px; opacity: 0.8; font-size: 1rem; }
-
-    /* LANG TOGGLE */
     .lang-toggle { position: absolute; top: 18px; right: 18px; display: flex; gap: 6px; }
     .lang-toggle button {
       background: rgba(255,255,255,0.15); border: 1.5px solid rgba(255,255,255,0.4);
-      color: white; padding: 6px 14px; border-radius: 20px; cursor: pointer; font-weight: 700; transition: all 0.2s;
+      color: white; padding: 6px 14px; border-radius: 20px; cursor: pointer; font-weight: 700; font-size: 0.85rem; transition: all 0.2s;
     }
     .lang-toggle button.active { background: white; color: var(--purple); }
+    header .icon { font-size: 2.8rem; display: block; margin-bottom: 12px; }
+    header h1 { font-size: clamp(1.5rem, 4vw, 2.4rem); font-weight: 900; }
+    header p { margin-top: 8px; opacity: 0.82; font-size: 0.97rem; }
 
-    /* DAYS */
-    .day-nav { display: flex; justify-content: center; gap: 10px; padding: 30px 20px 0; flex-wrap: wrap; }
+    .day-nav { display: flex; justify-content: center; gap: 10px; padding: 28px 20px 0; flex-wrap: wrap; }
     .day-btn {
       background: white; border: 2px solid var(--lavender); color: var(--purple);
-      padding: 11px 28px; border-radius: 50px; font-weight: 700; font-size: 0.95rem;
-      cursor: pointer; transition: all 0.2s;
+      padding: 10px 24px; border-radius: 50px; font-weight: 700; font-size: 0.93rem; cursor: pointer; transition: all 0.2s;
     }
     .day-btn.active, .day-btn:hover { background: var(--purple); color: white; border-color: var(--purple); }
 
-    .day-section { display: none; max-width: 860px; margin: 30px auto; padding: 0 20px 60px; }
+    .day-section { display: none; max-width: 820px; margin: 28px auto; padding: 0 20px 60px; }
     .day-section.active { display: block; }
+    .day-header { text-align: center; margin-bottom: 24px; }
+    .day-header h2 { font-size: 1.4rem; color: var(--purple); font-weight: 800; }
+    .date-badge { display: inline-block; background: var(--lavender); color: var(--dark); padding: 4px 14px; border-radius: 20px; font-size: 0.8rem; font-weight: 700; margin-top: 8px; }
 
-    .day-header { text-align: center; margin-bottom: 28px; }
-    .day-header h2 { font-size: 1.5rem; color: var(--purple); font-weight: 800; }
-    .day-date { display: inline-block; background: var(--lavender); color: var(--dark); padding: 4px 16px; border-radius: 20px; font-size: 0.82rem; font-weight: 700; margin-top: 8px; }
+    /* CARDS */
+    .cards { display: grid; gap: 20px; }
+    .card { background: white; border-radius: 18px; border: 1.5px solid #e8d8ff; box-shadow: 0 2px 14px rgba(107,63,160,0.07); overflow: hidden; transition: box-shadow 0.2s; }
+    .card:hover { box-shadow: 0 6px 24px rgba(107,63,160,0.14); }
 
-    /* PROJECT CARDS */
-    .cards { display: grid; gap: 22px; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); }
-    .card {
-      background: white; border-radius: 18px; padding: 26px;
-      box-shadow: 0 3px 16px rgba(107,63,160,0.1); border: 1px solid #e8d8ff;
-      transition: transform 0.2s, box-shadow 0.2s; cursor: pointer;
+    .card-header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 22px 24px; cursor: pointer; user-select: none;
     }
-    .card:hover { transform: translateY(-4px); box-shadow: 0 10px 28px rgba(107,63,160,0.18); }
-    .card-tag { display: inline-block; background: var(--soft); color: var(--purple); font-size: 0.72rem; font-weight: 800; padding: 3px 11px; border-radius: 12px; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.5px; }
-    .card h3 { font-size: 1.15rem; color: var(--dark); margin-bottom: 10px; font-weight: 800; }
-    .card .desc { font-size: 0.91rem; color: #555; line-height: 1.6; margin-bottom: 16px; }
+    .card-header-left { display: flex; align-items: center; gap: 14px; }
+    .card-tag { background: var(--soft); color: var(--purple); font-size: 0.7rem; font-weight: 800; padding: 3px 10px; border-radius: 10px; text-transform: uppercase; letter-spacing: 0.5px; white-space: nowrap; }
+    .card-title { font-size: 1.08rem; font-weight: 800; color: var(--dark); }
+    .card-arrow { font-size: 1.1rem; color: var(--purple); transition: transform 0.3s; }
+    .card.open .card-arrow { transform: rotate(180deg); }
 
-    /* EXPAND */
-    .card-detail { display: none; border-top: 1px solid #eee; margin-top: 4px; padding-top: 16px; }
-    .card.open .card-detail { display: block; }
-    .card.open { border-color: var(--lavender); }
-    .card-toggle { font-size: 0.82rem; color: var(--purple); font-weight: 700; cursor: pointer; background: none; border: none; padding: 0; }
+    .card-body { display: none; padding: 0 24px 24px; border-top: 1px solid #f0e4ff; }
+    .card.open .card-body { display: block; }
 
-    /* FAQ */
-    .faq { margin-top: 14px; }
-    .faq-item { margin-bottom: 10px; }
-    .faq-q { font-weight: 700; font-size: 0.88rem; color: var(--dark); margin-bottom: 3px; }
-    .faq-a { font-size: 0.86rem; color: #555; line-height: 1.55; }
+    .card-desc { font-size: 0.92rem; color: var(--muted); line-height: 1.65; margin: 16px 0; }
 
-    /* STEPS */
-    .steps { margin: 14px 0; counter-reset: step; }
-    .step { display: flex; gap: 12px; margin-bottom: 10px; align-items: flex-start; }
-    .step-num { min-width: 26px; height: 26px; background: var(--purple); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.78rem; font-weight: 800; }
-    .step-text { font-size: 0.88rem; color: #444; line-height: 1.5; padding-top: 3px; }
+    /* SECTIONS INSIDE CARD */
+    .section-title { font-size: 0.85rem; font-weight: 800; color: var(--dark); text-transform: uppercase; letter-spacing: 0.5px; margin: 18px 0 10px; }
 
-    /* LINKS */
-    .btn-links { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 14px; }
-    .btn { display: inline-block; background: var(--purple); color: white; padding: 8px 16px; border-radius: 9px; font-size: 0.83rem; font-weight: 700; text-decoration: none; transition: background 0.2s; }
+    .steps { display: flex; flex-direction: column; gap: 10px; }
+    .step { display: flex; gap: 12px; align-items: flex-start; }
+    .step-num { min-width: 26px; height: 26px; background: var(--purple); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.78rem; font-weight: 800; flex-shrink: 0; }
+    .step-text { font-size: 0.88rem; color: var(--muted); line-height: 1.55; padding-top: 3px; }
+
+    .alert-box { background: #fdf4ff; border: 1.5px solid var(--lavender); border-radius: 10px; padding: 12px 14px; margin: 12px 0; font-size: 0.87rem; color: var(--dark); line-height: 1.6; }
+    .alert-box strong { color: var(--purple); }
+
+    .faq-list { display: flex; flex-direction: column; gap: 12px; }
+    .faq-item { background: #fdf4ff; border-radius: 10px; padding: 12px 14px; }
+    .faq-q { font-weight: 800; font-size: 0.87rem; color: var(--dark); margin-bottom: 5px; }
+    .faq-a { font-size: 0.85rem; color: var(--muted); line-height: 1.58; }
+
+    .color-swatches { display: flex; gap: 10px; margin: 8px 0; flex-wrap: wrap; }
+    .swatch { display: flex; align-items: center; gap: 7px; font-size: 0.83rem; color: var(--muted); }
+    .swatch-dot { width: 22px; height: 22px; border-radius: 50%; border: 1.5px solid #ddd; }
+
+    .org-list { display: flex; gap: 8px; flex-wrap: wrap; margin: 6px 0; }
+    .org-badge { background: var(--soft); border: 1.5px solid var(--lavender); color: var(--purple); padding: 5px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: 700; }
+
+    .btn-row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 18px; }
+    .btn { display: inline-block; background: var(--purple); color: white; padding: 9px 18px; border-radius: 9px; font-size: 0.84rem; font-weight: 700; text-decoration: none; transition: background 0.2s; }
     .btn:hover { background: var(--dark); }
     .btn.outline { background: white; color: var(--purple); border: 1.5px solid var(--lavender); }
     .btn.outline:hover { background: var(--soft); }
-
-    /* ORGANIZERS */
-    .organizer-list { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 10px; }
-    .org-badge { background: var(--soft); border: 1.5px solid var(--lavender); color: var(--purple); padding: 5px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: 700; }
+    .btn.green { background: #25D366; }
+    .btn.green:hover { background: #1da851; }
 
     /* COMING SOON */
-    .coming-soon { text-align: center; padding: 60px 20px; color: #999; }
-    .coming-soon .icon { font-size: 3rem; margin-bottom: 12px; }
-    .coming-soon p { font-size: 1rem; }
+    .coming-soon { text-align: center; padding: 60px 20px; color: #aaa; }
+    .coming-soon .icon { font-size: 2.8rem; margin-bottom: 12px; }
 
-    footer { text-align: center; padding: 24px; font-size: 0.85rem; color: #888; border-top: 1px solid #e8d8ff; margin-top: 20px; }
+    footer { text-align: center; padding: 22px; font-size: 0.84rem; color: #999; border-top: 1px solid #e8d8ff; }
   </style>
 </head>
 <body>
@@ -97,13 +101,13 @@
     <button class="active" onclick="setLang('es')">ES</button>
     <button onclick="setLang('en')">EN</button>
   </div>
-  <span class="emoji-big">💜</span>
+  <span class="icon">💜</span>
   <h1 class="t" data-es="BTS en México — Proyectos de Fans" data-en="BTS in Mexico — Fan Projects">BTS en México — Proyectos de Fans</h1>
-  <p class="t" data-es="Selecciona tu día y descubre los proyectos que tenemos para ti." data-en="Select your day and discover the fan projects waiting for you.">Selecciona tu día y descubre los proyectos que tenemos para ti.</p>
+  <p class="t" data-es="Selecciona tu día y descubre los proyectos" data-en="Select your day and discover the fan projects">Selecciona tu día y descubre los proyectos</p>
 </header>
 
 <div class="day-nav">
-  <button class="day-btn active" onclick="showDay(1)">💜 <span class="t" data-es="Día 1 — 7 Mayo" data-en="Day 1 — May 7">Día 1 — 7 Mayo</span></button>
+  <button class="day-btn active" onclick="showDay(1)">💜 Día 1 — 7 Mayo</button>
   <button class="day-btn" onclick="showDay(2)"><span class="t" data-es="Día 2 — Próximamente" data-en="Day 2 — Coming Soon">Día 2 — Próximamente</span></button>
   <button class="day-btn" onclick="showDay(3)"><span class="t" data-es="Día 3 — Próximamente" data-en="Day 3 — Coming Soon">Día 3 — Próximamente</span></button>
 </div>
@@ -111,58 +115,91 @@
 <!-- DÍA 1 -->
 <div class="day-section active" id="day1">
   <div class="day-header">
-    <h2 class="t" data-es="Proyectos del Día 1" data-en="Day 1 Projects">Proyectos del Día 1</h2>
-    <span class="day-date">📅 7 de Mayo, 2026</span>
+    <h2 class="t" data-es="Proyectos — Día 1" data-en="Day 1 Projects">Proyectos — Día 1</h2>
+    <span class="date-badge">📅 7 de Mayo, 2026</span>
   </div>
   <div class="cards">
 
-    <div class="card" id="card-ph">
-      <span class="card-tag">Proyecto Especial</span>
-      <h3>💜 Purple Hearts</h3>
-      <p class="desc t"
-        data-es="Durante Take Two, llenemos el estadio de corazones morados con la frase 'I STAYED' para recordarle a BTS que nos quedamos."
-        data-en="During Take Two, let's fill the stadium with purple hearts and the phrase 'I STAYED' to remind BTS that we stayed.">
-        Durante Take Two, llenemos el estadio de corazones morados con la frase "I STAYED" para recordarle a BTS que nos quedamos.
-      </p>
-      <button class="card-toggle" onclick="toggleCard('card-ph', this)">
-        <span class="t" data-es="▼ Ver más detalles" data-en="▼ See more details">▼ Ver más detalles</span>
-      </button>
+    <div class="card" id="card1">
+      <div class="card-header" onclick="toggleCard('card1')">
+        <div class="card-header-left">
+          <span class="card-tag">Fan Project</span>
+          <span class="card-title">💜 Purple Hearts</span>
+        </div>
+        <span class="card-arrow">▼</span>
+      </div>
+      <div class="card-body">
 
-      <div class="card-detail">
+        <p class="card-desc t"
+          data-es="Durante Take Two, llenemos el estadio de corazones morados con la frase 'I STAYED' para recordarle a BTS que nos quedamos."
+          data-en="During Take Two, let's fill the stadium with purple hearts and the phrase 'I STAYED' to remind BTS that we stayed.">
+          Durante Take Two, llenemos el estadio de corazones morados con la frase "I STAYED" para recordarle a BTS que nos quedamos.
+        </p>
 
-        <p style="font-weight:800;font-size:0.9rem;color:var(--dark);margin-bottom:8px;" class="t" data-es="¿Qué hay que hacer?" data-en="What do you need to do?">¿Qué hay que hacer?</p>
+        <p class="section-title t" data-es="¿Qué hay que hacer?" data-en="What to do?">¿Qué hay que hacer?</p>
         <div class="steps">
-          <div class="step"><span class="step-num">1</span><span class="step-text t" data-es="Llega al estadio con tu corazón morado (físico o en pantalla)." data-en="Arrive at the stadium with your purple heart (physical or on screen).">Llega al estadio con tu corazón morado (físico o en pantalla).</span></div>
-          <div class="step"><span class="step-num">2</span><span class="step-text t" data-es="Cuando empiece 'Take Two', levanta tu corazón bien alto." data-en="When 'Take Two' starts, raise your heart up high.">Cuando empiece "Take Two", levanta tu corazón bien alto.</span></div>
-          <div class="step"><span class="step-num">3</span><span class="step-text t" data-es="Repite en voz alta: 'I STAYED' junto con toda la ARMY." data-en="Repeat out loud: 'I STAYED' together with all of ARMY.">Repite en voz alta: "I STAYED" junto con toda la ARMY.</span></div>
+          <div class="step">
+            <span class="step-num">1</span>
+            <span class="step-text t" data-es="Cuando empiece 'Take Two', levanta tu corazón a la altura de tu Army Bomb durante toda la canción." data-en="When 'Take Two' starts, raise your heart to the level of your Army Bomb for the entire song.">Cuando empiece "Take Two", levanta tu corazón a la altura de tu Army Bomb durante toda la canción.</span>
+          </div>
         </div>
 
-        <p style="font-weight:800;font-size:0.9rem;color:var(--dark);margin:14px 0 8px;" class="t" data-es="Preguntas Frecuentes" data-en="Frequently Asked Questions">Preguntas Frecuentes</p>
-        <div class="faq">
+        <div class="alert-box">
+          <strong>⚠️ IMPORTANTE:</strong> Mantengan el corazón en alto desde el inicio hasta el final de la canción para crear un momento especial y que el efecto se vea en todo el estadio.
+        </div>
+        <div class="alert-box">
+          <strong>💜 Sobre el Army Bomb:</strong> El Army Bomb no se va a apagar en ningún momento. Pueden sostener el corazón junto a su Army Bomb, y con su otra mano pueden usar su celular si lo desean, pero el Army Bomb siempre debe permanecer encendido.
+        </div>
+
+        <p class="section-title t" data-es="Preguntas Frecuentes" data-en="FAQ">Preguntas Frecuentes</p>
+        <div class="faq-list">
           <div class="faq-item">
-            <p class="faq-q t" data-es="¿Necesito comprar algo?" data-en="Do I need to buy anything?">¿Necesito comprar algo?</p>
-            <p class="faq-a t" data-es="No, puedes usar la pantalla de tu celular con un corazón morado." data-en="No, you can use your phone screen with a purple heart emoji.">No, puedes usar la pantalla de tu celular con un corazón morado 💜</p>
+            <p class="faq-q t" data-es="¿Qué pasa si 'Take Two' no está en el setlist?" data-en="What if 'Take Two' is not in the setlist?">¿Qué pasa si "Take Two" no está en el setlist?</p>
+            <p class="faq-a t" data-es="En caso de que 'Take Two' no esté en el setlist, se tiene contemplado hacerlo durante 'Magic Shop'. Si ninguna canción está dentro, se modificará y avisará inmediatamente." data-en="If 'Take Two' is not in the setlist, the project will take place during 'Magic Shop'. If neither song is included, it will be modified and announced immediately.">En caso de que "Take Two" no esté en el setlist, se tiene contemplado hacerlo durante "Magic Shop". Si ninguna canción está dentro, se modificará y avisará inmediatamente.</p>
           </div>
           <div class="faq-item">
-            <p class="faq-q t" data-es="¿En qué momento exacto del concierto?" data-en="At what exact moment in the concert?">¿En qué momento exacto del concierto?</p>
-            <p class="faq-a t" data-es="Durante la canción 'Take Two'. Sigue las indicaciones de los organizadores en redes." data-en="During the song 'Take Two'. Follow the organizers' instructions on social media.">Durante la canción "Take Two". Sigue las indicaciones en redes sociales.</p>
+            <p class="faq-q t" data-es="¿Llevará alguna frase?" data-en="Will it include a phrase?">¿Llevará alguna frase?</p>
+            <p class="faq-a">
+              🎵 <strong>Take Two:</strong> "I Stayed"<br>
+              🎵 <strong>Magic Shop:</strong> "I'll Show You"
+            </p>
+          </div>
+          <div class="faq-item">
+            <p class="faq-q t" data-es="¿Dónde entregarán el material?" data-en="Where will materials be handed out?">¿Dónde entregarán el material?</p>
+            <p class="faq-a t" data-es="El staff estará en Puerta 6 y Puerta 15. También se repartirá dentro de las zonas para que más personas puedan participar." data-en="Staff will be at Gate 6 and Gate 15. Materials will also be distributed inside the venue zones.">El staff estará en <strong>Puerta 6</strong> y <strong>Puerta 15</strong>. También se repartirá dentro de las zonas para que más personas puedan participar.</p>
+          </div>
+          <div class="faq-item">
+            <p class="faq-q t" data-es="¿Nosotros haríamos los corazones?" data-en="Do we need to make the hearts ourselves?">¿Nosotros haríamos los corazones?</p>
+            <p class="faq-a t" data-es="El staff se encargará de realizar la mayor cantidad de corazones. Sin embargo, abrimos convocatoria para ARMY que guste apoyar haciendo corazones adicionales (sin frase). ¡Ayudarás a que el proyecto se vea más grande!" data-en="Staff will handle making most of the hearts. However, we welcome ARMY who want to help make additional hearts (without the phrase). You'll help make the project even bigger!">El staff se encargará de realizar la mayor cantidad de corazones. Sin embargo, abrimos convocatoria para ARMY que guste apoyar haciendo corazones adicionales (sin frase). ¡Ayudarás a que el proyecto se vea más grande!</p>
           </div>
           <div class="faq-item">
             <p class="faq-q t" data-es="¿Cómo me entero de más detalles?" data-en="How do I get more details?">¿Cómo me entero de más detalles?</p>
-            <p class="faq-a t" data-es="Sigue a las fanbases organizadoras en X (Twitter) para actualizaciones." data-en="Follow the organizing fanbases on X (Twitter) for updates.">Sigue a las fanbases organizadoras en X (Twitter) para actualizaciones.</p>
+            <p class="faq-a t" data-es="Sigue a las fanbases organizadoras en X (Twitter) para actualizaciones en tiempo real." data-en="Follow the organizing fanbases on X (Twitter) for real-time updates.">Sigue a las fanbases organizadoras en X (Twitter) para actualizaciones en tiempo real.</p>
           </div>
         </div>
 
-        <p style="font-weight:800;font-size:0.9rem;color:var(--dark);margin:14px 0 6px;" class="t" data-es="Organizadoras" data-en="Organizers">Organizadoras</p>
-        <div class="organizer-list">
+        <p class="section-title t" data-es="Materiales — Haz tu propio corazón" data-en="Materials — Make your own heart">Materiales — Haz tu propio corazón</p>
+        <div class="color-swatches">
+          <div class="swatch"><div class="swatch-dot" style="background:#6A0DAD;"></div>#6A0DAD</div>
+          <div class="swatch"><div class="swatch-dot" style="background:#772FAD;"></div>#772FAD</div>
+          <div class="swatch"><div class="swatch-dot" style="background:#BA81E2;"></div>#BA81E2</div>
+        </div>
+        <p style="font-size:0.84rem;color:var(--muted);margin:8px 0 4px;">
+          📐 <strong class="t" data-es="Zona Platino:" data-en="Platinum Zone:">Zona Platino:</strong> <span class="t" data-es="corazón pequeño (están más cerca del escenario)" data-en="small heart (closer to the stage)">corazón pequeño (están más cerca del escenario)</span><br>
+          📐 <strong class="t" data-es="Otras zonas:" data-en="Other zones:">Otras zonas:</strong> <span class="t" data-es="corazón grande. Cada ARMY decide qué tamaño usar." data-en="large heart. Each ARMY can decide which size to use.">corazón grande. Cada ARMY decide qué tamaño usar.</span>
+        </p>
+
+        <p class="section-title t" data-es="Organizadoras" data-en="Organizers">Organizadoras</p>
+        <div class="org-list">
           <span class="org-badge">@btsmx.eternal</span>
           <span class="org-badge">@cinnamoon_bee</span>
+          <span class="org-badge">@axomys</span>
         </div>
 
-        <div class="btn-links" style="margin-top:16px;">
-          <a href="https://x.com/www_bangtan_613/status/2029242506844532839?s=20" target="_blank" class="btn">
-            <span class="t" data-es="Ver proyecto en X" data-en="See project on X">Ver proyecto en X 🐦</span>
-          </a>
+        <div class="btn-row">
+          <a href="https://x.com/www_bangtan_613/status/2029242506844532839?s=20" target="_blank" class="btn">Ver proyecto en X 🐦</a>
+          <a href="https://www.canva.com/design/DAHDH8piK6k/jQRHbJb7aPI1so2Ezmm5RA/edit" target="_blank" class="btn outline t" data-es="Descargar plantilla corazón" data-en="Download heart template">Descargar plantilla corazón 💜</a>
+          <a href="https://chat.whatsapp.com/KBdkl9BdZCV3Kv3SqgNk5R?mode=gi_t" target="_blank" class="btn green">WhatsApp 💬</a>
         </div>
 
       </div>
@@ -175,7 +212,7 @@
 <div class="day-section" id="day2">
   <div class="coming-soon">
     <div class="icon">🔜</div>
-    <p class="t" data-es="Los proyectos del Día 2 se anunciarán pronto. ¡Vuelve después!" data-en="Day 2 projects will be announced soon. Check back later!">Los proyectos del Día 2 se anunciarán pronto. ¡Vuelve después!</p>
+    <p class="t" data-es="Los proyectos del Día 2 se anunciarán pronto." data-en="Day 2 projects coming soon.">Los proyectos del Día 2 se anunciarán pronto.</p>
   </div>
 </div>
 
@@ -183,7 +220,7 @@
 <div class="day-section" id="day3">
   <div class="coming-soon">
     <div class="icon">🔜</div>
-    <p class="t" data-es="Los proyectos del Día 3 se anunciarán pronto. ¡Vuelve después!" data-en="Day 3 projects will be announced soon. Check back later!">Los proyectos del Día 3 se anunciarán pronto. ¡Vuelve después!</p>
+    <p class="t" data-es="Los proyectos del Día 3 se anunciarán pronto." data-en="Day 3 projects coming soon.">Los proyectos del Día 3 se anunciarán pronto.</p>
   </div>
 </div>
 
@@ -205,13 +242,8 @@
     document.getElementById('day' + n).classList.add('active');
     document.querySelectorAll('.day-btn')[n - 1].classList.add('active');
   }
-  function toggleCard(id, btn) {
-    const card = document.getElementById(id);
-    card.classList.toggle('open');
-    const isOpen = card.classList.contains('open');
-    btn.querySelector('.t').setAttribute('data-es', isOpen ? '▲ Ocultar detalles' : '▼ Ver más detalles');
-    btn.querySelector('.t').setAttribute('data-en', isOpen ? '▲ Hide details' : '▼ See more details');
-    btn.querySelector('.t').textContent = isOpen ? '▲ Ocultar detalles' : '▼ Ver más detalles';
+  function toggleCard(id) {
+    document.getElementById(id).classList.toggle('open');
   }
 </script>
 </body>
