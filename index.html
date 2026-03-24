@@ -140,12 +140,52 @@
     footer { text-align: center; padding: 22px; font-size: 0.84rem; color: #999; border-top: 1px solid #e8d8ff; }
     .export-toast { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%); background: var(--dark); color: white; padding: 12px 24px; border-radius: 30px; font-size: 0.85rem; font-weight: 600; display: none; z-index: 999; }
     .export-toast.show { display: block; }
+
+    /* ── ARIRANG TAB ── */
+    :root { --arirang: #C0392B; --arirang-dark: #7B241C; --arirang-light: #FDEDEC; --arirang-border: #E8A09A; }
+    .day-btn.arirang-btn { border-color: var(--arirang-border); color: var(--arirang); background: white; }
+    .day-btn.arirang-btn.active, .day-btn.arirang-btn:hover { background: var(--arirang); color: white; border-color: var(--arirang); }
+    .day-section.arirang-section .day-header h2 { color: var(--arirang); }
+    .day-section.arirang-section .date-badge { background: #F5B7B1; color: var(--arirang-dark); }
+    .card.arirang-card { border-color: var(--arirang-border); background: white; }
+    .card.arirang-card:hover { box-shadow: 0 6px 24px rgba(192,57,43,0.13); }
+    .card.arirang-card .card-header { background: linear-gradient(135deg, var(--arirang-dark) 0%, var(--arirang) 100%); border-radius: 0; margin: 0; padding: 20px 24px; cursor: pointer; user-select: none; display: flex; align-items: center; justify-content: space-between; }
+    .card.arirang-card .card-header-left { display: flex; align-items: center; gap: 12px; }
+    .card.arirang-card .card-tag { background: rgba(255,255,255,0.18); color: white; font-size: 0.7rem; font-weight: 800; padding: 3px 10px; border-radius: 10px; text-transform: uppercase; white-space: nowrap; }
+    .card.arirang-card .card-title { color: white; font-size: 1.05rem; font-weight: 800; }
+    .card.arirang-card .card-arrow { color: white; font-size: 1rem; transition: transform 0.3s; flex-shrink: 0; }
+    .card.arirang-card.open .card-arrow { transform: rotate(180deg); }
+    .card.arirang-card .card-body { border-top: 1px solid var(--arirang-border); }
+    .arirang-alert { background: var(--arirang-light); border: 1.5px solid var(--arirang-border); border-radius: 10px; padding: 12px 14px; margin: 10px 0; font-size: 0.86rem; color: var(--arirang-dark); line-height: 1.6; }
+    .arirang-alert strong { color: var(--arirang); }
+    .arirang-lyrics { background: var(--arirang-dark); color: white; border-radius: 14px; padding: 20px 22px; margin: 14px 0; font-family: 'Segoe UI', sans-serif; }
+    .arirang-lyrics .lyric-row { margin-bottom: 14px; }
+    .arirang-lyrics .lyric-row:last-child { margin-bottom: 0; }
+    .arirang-lyrics .lyric-ko { font-size: 1.1rem; font-weight: 700; letter-spacing: 0.5px; color: #F5B7B1; }
+    .arirang-lyrics .lyric-rom { font-size: 0.88rem; color: #ddd; margin-top: 2px; }
+    .arirang-lyrics .lyric-es { font-size: 0.82rem; color: #aaa; margin-top: 2px; font-style: italic; }
+    .pronun-box { background: #fff8f8; border: 1.5px solid var(--arirang-border); border-radius: 12px; padding: 16px 18px; margin: 12px 0; }
+    .pronun-box .pronun-title { font-size: 0.78rem; font-weight: 800; color: var(--arirang); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 10px; }
+    .pronun-box .pronun-text { font-size: 0.88rem; color: #444; line-height: 1.8; }
+    .pronun-box .pronun-notes { margin-top: 10px; display: flex; flex-direction: column; gap: 6px; }
+    .pronun-box .pronun-note { font-size: 0.8rem; color: var(--muted); background: #f9f0f0; border-radius: 7px; padding: 5px 10px; line-height: 1.5; }
+    .stream-btns { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 16px; }
+    .stream-btn { display: inline-flex; align-items: center; gap: 7px; padding: 9px 16px; border-radius: 30px; font-size: 0.83rem; font-weight: 700; text-decoration: none; transition: opacity 0.2s; }
+    .stream-btn:hover { opacity: 0.85; }
+    .stream-btn.spotify { background: #1DB954; color: white; }
+    .stream-btn.apple { background: #FC3C44; color: white; }
+    .stream-btn.youtube { background: #FF0000; color: white; }
+    .stream-btn.all { background: var(--arirang-dark); color: white; }
+    .tweet-embed-wrap { margin: 14px 0; border-radius: 12px; overflow: hidden; border: 1.5px solid var(--arirang-border); }
+    .credit-line { font-size: 0.78rem; color: var(--muted); margin-top: 6px; text-align: center; }
+    .credit-line a { color: var(--arirang); font-weight: 700; text-decoration: none; }
+    .credit-line a:hover { text-decoration: underline; }
   </style>
 </head>
 <body>
 
 <div class="update-bar">
-  🔄 Última actualización: <span>7 de marzo 2026</span> · Se actualiza conforme se anuncie nueva información
+  🔄 Última actualización: <span>23 de marzo 2026</span> · Se actualiza conforme se anuncie nueva información
 </div>
 
 <header>
@@ -210,6 +250,24 @@
         </div>
       </div>
     </div>
+
+    <!-- Tarjeta ARIRANG independiente -->
+    <div style="margin-top:18px;">
+      <div class="day-card" style="border:2px solid #E8A09A;max-width:100%;">
+        <div class="day-card-header" onclick="irArirang()" style="background:linear-gradient(135deg,#7B241C 0%,#C0392B 100%);cursor:pointer;">
+          <h3 style="font-size:1.05rem;">🎶 ARIRANG Body to Body</h3>
+          <div class="day-date">Proyecto musical · Los 3 días · 7, 9 y 10 mayo</div>
+        </div>
+        <div class="day-card-body">
+          <ul class="project-list">
+            <li>Canta 아리랑 cuando suene en el concierto</li>
+            <li>Guía de pronunciación en español</li>
+            <li>Links a Spotify, Apple Music y YouTube</li>
+          </ul>
+          <button class="ver-btn" onclick="irArirang()" style="background:linear-gradient(90deg,#7B241C,#C0392B);">Ver guía completa →</button>
+        </div>
+      </div>
+    </div>
   </div>
 
   <div class="share-section">
@@ -247,6 +305,7 @@
 <!-- PROYECTOS -->
 <div id="projectsPage" class="projects-view">
 
+  <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
   <div style="max-width:820px;margin:24px auto 0;padding:0 20px;">
     <button class="back-btn" onclick="volverInicio()">← Volver al inicio</button>
   </div>
@@ -255,6 +314,7 @@
     <button class="day-btn active" onclick="showDay(1)">Día 1 — 07 mayo</button>
     <button class="day-btn" onclick="showDay(2)">Día 2 — 09 mayo</button>
     <button class="day-btn" onclick="showDay(3)">Día 3 — 10 mayo</button>
+    <button class="day-btn arirang-btn" onclick="showDay(4)">🎶 ARIRANG</button>
   </div>
 
   <div class="map-section">
@@ -558,6 +618,140 @@
     </div>
   </div>
 
+  <!-- ARIRANG BODY TO BODY — TODOS LOS DÍAS -->
+  <div class="day-section arirang-section" id="day4">
+    <div class="day-header">
+      <h2>🎶 ARIRANG Body to Body</h2>
+      <span class="date-badge" style="background:#F5B7B1;color:#7B241C;">📅 Todos los días · 7, 9 y 10 mayo</span>
+    </div>
+    <div class="cards">
+      <div class="card arirang-card" id="card-arirang">
+        <div class="card-header" onclick="toggleCard('card-arirang')">
+          <div class="card-header-left">
+            <span class="card-tag">Proyecto Musical</span>
+            <span class="card-title">🎶 Canta ARIRANG cuando suene Body to Body</span>
+          </div>
+          <span class="card-arrow">▼</span>
+        </div>
+        <div class="card-body">
+          <p class="card-desc">Body to Body, la primera canción del álbum ARIRANG, incluye un fragmento del himno folclórico coreano <strong>아리랑 (Arirang)</strong>. Cuando suene ese momento en el concierto, ¡cantémoslo todas juntas con ellos!</p>
+
+          <p class="section-title">🎵 La letra — Apréndetela</p>
+          <div class="arirang-lyrics">
+            <div class="lyric-row">
+              <div class="lyric-ko">아리랑, 아리랑, 아라리요</div>
+              <div class="lyric-rom">A-ri-rang, a-ri-rang, a-ra-ri-yo</div>
+              <div class="lyric-es">Arirang, arirang, a-ra-ri-yo</div>
+            </div>
+            <div class="lyric-row">
+              <div class="lyric-ko">아리랑 고개로 넘어간다</div>
+              <div class="lyric-rom">A-ri-rang go-gue-ro no-mó-gan-da</div>
+              <div class="lyric-es">Arirang cruza la colina</div>
+            </div>
+            <div class="lyric-row">
+              <div class="lyric-ko">나를 버리고 가시는 님은</div>
+              <div class="lyric-rom">Na-rul bó-ri-go ga-shi-nun ni-mun</div>
+              <div class="lyric-es">Quien me abandona y se va</div>
+            </div>
+            <div class="lyric-row">
+              <div class="lyric-ko">십 리도 못 가서 발병 난다</div>
+              <div class="lyric-rom">Shim ri-do mot ga-so bal-byong nan-da</div>
+              <div class="lyric-es">No llegará ni a diez li antes de cansarse</div>
+            </div>
+          </div>
+
+          <p class="section-title">🗣️ Guías de pronunciación</p>
+
+          <!-- @andibun_ -->
+          <div class="pronun-box">
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
+              <img src="https://unavatar.io/twitter/andibun_" alt="@andibun_" style="width:36px;height:36px;border-radius:50%;border:2px solid var(--arirang-border);object-fit:cover;" onerror="this.src='https://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png'"/>
+              <div>
+                <div style="font-weight:800;font-size:0.88rem;color:var(--arirang-dark);">@andibun_</div>
+                <div style="font-size:0.76rem;color:var(--muted);">Pronunciación fácil en español</div>
+              </div>
+            </div>
+            <div class="pronun-text">
+              <em>"Arirang, arirang, a ra ri yo<br>
+              Arirang go gero nomoganda<br>
+              Narul bo rigo ca shinun nimun<br>
+              Shipnido motcaso bpal biong nanda"</em>
+            </div>
+          </div>
+          <div class="tweet-embed-wrap">
+            <blockquote class="twitter-tweet" data-lang="es" data-theme="light">
+              <a href="https://x.com/andibun_/status/2035571494718177731"></a>
+            </blockquote>
+          </div>
+
+          <!-- @FrvrBlltprf -->
+          <div class="pronun-box" style="margin-top:16px;">
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
+              <img src="https://unavatar.io/twitter/FrvrBlltprf" alt="@FrvrBlltprf" style="width:36px;height:36px;border-radius:50%;border:2px solid var(--arirang-border);object-fit:cover;" onerror="this.src='https://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png'"/>
+              <div>
+                <div style="font-weight:800;font-size:0.88rem;color:var(--arirang-dark);">@FrvrBlltprf</div>
+                <div style="font-size:0.76rem;color:var(--muted);">Romanización detallada + notas fonéticas</div>
+              </div>
+            </div>
+            <div class="arirang-lyrics" style="margin:0 0 12px;">
+              <div class="lyric-row">
+                <div class="lyric-ko">아리랑, 아리랑, 아라리요</div>
+                <div class="lyric-rom">A-ri-rang, a-ri-rang, a-ra-ri-yo</div>
+              </div>
+              <div class="lyric-row">
+                <div class="lyric-ko">아리랑 고개로 넘어간다</div>
+                <div class="lyric-rom">A-ri-rang go-gue-ro no-mó-gan-da</div>
+              </div>
+              <div class="lyric-row">
+                <div class="lyric-ko">나를 버리고 가시는 님은</div>
+                <div class="lyric-rom">Na-rul bó-ri-go ga-shi-nun ni-mun</div>
+              </div>
+              <div class="lyric-row">
+                <div class="lyric-ko">십 리도 못 가서 발병 난다</div>
+                <div class="lyric-rom">Shim ri-do mot ga-so bal-byong nan-da</div>
+              </div>
+            </div>
+            <div class="pronun-notes">
+              <div class="pronun-note">🔤 <strong>eo (어)</strong> — suena entre "o" y "a", como "amor" pero no tan redondo</div>
+              <div class="pronun-note">🔤 <strong>eu (으)</strong> — sonido cerrado, parecido a "u" suave como en "luz"</div>
+              <div class="pronun-note">🔤 <strong>shi (시)</strong> → suena suave, como cuando pronuncias "shibal" 🤣</div>
+              <div class="pronun-note">🔤 <strong>g/k</strong> → sonido intermedio, no de "ge ge"... más como decir "gordo" a mala onda</div>
+            </div>
+          </div>
+          <div class="tweet-embed-wrap">
+            <blockquote class="twitter-tweet" data-lang="es" data-theme="light">
+              <a href="https://x.com/FrvrBlltprf/status/2035777201707090031"></a>
+            </blockquote>
+          </div>
+
+          <p class="section-title">🎧 Escucha Body to Body antes del concierto</p>
+          <div class="stream-btns">
+            <a href="https://open.spotify.com/track/02PyZNzTdzA1Nbxycnv93V" target="_blank" class="stream-btn spotify">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="white"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
+              Spotify
+            </a>
+            <a href="https://music.apple.com/us/album/arirang/1868862375" target="_blank" class="stream-btn apple">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="white"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98l-.09.06c-.22.14-2.22 1.3-2.2 3.88.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+              Apple Music
+            </a>
+            <a href="https://youtu.be/RBaSiVjtKR4" target="_blank" class="stream-btn youtube">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="white"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+              YouTube Music
+            </a>
+            <a href="https://bts.lnk.to/arirang" target="_blank" class="stream-btn all">🎵 Todas las plataformas</a>
+          </div>
+
+          <div class="arirang-alert" style="margin-top:18px;">
+            <strong>📢 Momento exacto:</strong> El fragmento de Arirang aparece en <strong>Body to Body</strong>, la primera canción del setlist. ¡Estén listas desde que empiece!
+          </div>
+          <div class="arirang-alert">
+            <strong>💡 Tip:</strong> Practica escuchando la canción antes del concierto para identificar exactamente dónde entra el fragmento de Arirang.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div class="share-section">
     <div class="share-box">
       <span class="share-label">💜 Comparte los proyectos:</span>
@@ -593,6 +787,12 @@
     document.getElementById('homePage').style.display = 'none';
     document.getElementById('projectsPage').classList.add('active');
     showDay(n);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+  function irArirang() {
+    document.getElementById('homePage').style.display = 'none';
+    document.getElementById('projectsPage').classList.add('active');
+    showDay(4);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
   function volverInicio() {
